@@ -22,8 +22,9 @@ document.getElementById('test-button').addEventListener('click', function(){
     }
   
     /* [DONE] add class 'active' to the clicked link */
+    
+    clickedElement.classList.add('active'); 
     console.log('clickedElement:', clickedElement);
-    clickedElement.classList.add('active');
   
     /* [DONE] remove class 'active' from all articles */
 
@@ -33,12 +34,20 @@ document.getElementById('test-button').addEventListener('click', function(){
         activeArticle.classList.remove('active');
     }   
 
+    /* [DONE] get 'href' attribute from the clicked link */
+
+    const articleSelector = clickedElement.getAttribute('href');
+    console.log('articleSelector', articleSelector);
+
+    /* [DONE] find the correct article using the selector (value of 'href' attribute) */
   
-    /* get 'href' attribute from the clicked link */
-  
-    /* find the correct article using the selector (value of 'href' attribute) */
-  
-    /* add class 'active' to the correct article */
+    const targetArticle = document.querySelector(articleSelector);
+    console.log('targetArticle', targetArticle);
+
+    /* {DONE] add class 'active' to the correct article */
+
+    targetArticle.classList.add('active'); 
+
   }
   
   const links = document.querySelectorAll('.titles a');
