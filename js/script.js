@@ -106,18 +106,21 @@
 
     /* START LOOP: for every article: */
 
+    for(let article of articles){
 
       /* find tags wrapper */
 
-
+      const tagList = article.querySelector(optArticleTagsSelector);
+      console.log('found tags wrapper:', tagList);
 
       /* make html variable with empty string */
 
-
+      let html = '';
 
       /* get tags from data-tags attribute */
 
-
+      const articleTags = article.getAttribute('data-tags');
+      console.log('found tags: ', articleTags);
 
       /* split tags into array */
 
@@ -134,6 +137,7 @@
       /* insert HTML of all the links into the tags wrapper */
 
     /* END LOOP: for every article: */
+    }
   }
   generateTags();
 }
