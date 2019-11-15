@@ -131,14 +131,15 @@
 
       for (let tag of articleTagsArray){
         console.log('found tag:', tag);
+
         /* generate HTML of the link */
 
         const tagHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
         console.log('added tagHTML: ', tagHTML);
 
         /* add generated code to html variable */
-        html = html + tagHTML + ' ';
 
+        html = html + tagHTML + ' ';
 
       /* END LOOP: for each tag */
 
@@ -154,14 +155,23 @@
   generateTags();
 
   function tagClickHandler(event){
+
     /* prevent default action for this event */
+
+    event.preventDefault();
 
     /* make new constant named "clickedElement" and give it the value of "this" */
 
+    const clickedElement = this;
+
     /* make a new constant "href" and read the attribute "href" of the clicked element */
+
+    const href = clickedElement.getAttribute('href');
 
     /* make a new constant "tag" and extract tag from the "href" constant */
 
+    const tag = href.replace('#tag-', '');
+    
     /* find all tag links with class active */
 
     /* START LOOP: for each active tag link */
@@ -193,4 +203,4 @@
 
   addClickListenersToTags();
 
-}       
+}
