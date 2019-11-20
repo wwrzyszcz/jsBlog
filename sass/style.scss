@@ -42,7 +42,7 @@ body {
 }
 
 .tag-size-1 {
-  font-size: 100%;
+  font-size: 80%;
   color: blue;
 }
 .tag-size-2 {
@@ -58,7 +58,7 @@ body {
   color: brown;
 }
 .tag-size-5 {
-  font-size: 180%;
+  font-size: 200%;
   color: black;
 }
 
@@ -114,10 +114,9 @@ body {
 
 /* Tags */
 
-.tags {
+.tags li {
   text-align: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: inline;
 }
 
 /* Authors */
