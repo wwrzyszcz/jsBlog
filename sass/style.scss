@@ -41,6 +41,27 @@ body {
   }
 }
 
+.tag-size-1 {
+  font-size: 100%;
+  color: blue;
+}
+.tag-size-2 {
+  font-size: 120%;
+  color: red;
+}
+.tag-size-3 {
+  font-size: 140%;
+  color: green;
+}
+.tag-size-4 {
+  font-size: 160%;
+  color: brown;
+}
+.tag-size-5 {
+  font-size: 180%;
+  color: black;
+}
+
 /* Layout */
 
 .wrapper {
@@ -89,6 +110,14 @@ body {
   li {
     display: inline-block;
   }
+}
+
+/* Tags */
+
+.tags {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Authors */
