@@ -281,6 +281,7 @@
 
     /* END LOOP: for every article: */
   }
+  
   generateAuthors();
 
   function authorClickHandler(event){
