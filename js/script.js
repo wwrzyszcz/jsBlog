@@ -148,7 +148,7 @@
 
         /* generate HTML of the link */
         const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
-        console.log('added linkHTML: ', linkHTML);
+        //console.log('added linkHTML: ', linkHTML);
 
         /* add generated code to html variable */
         html = html + linkHTML + ' ';
@@ -234,7 +234,7 @@
   function addClickListenersToTags(){
     /* find all links to tags */
     const tagLinks = document.querySelectorAll(optArticleSingleTagSelector + ',' + optTagsListSelector);
-    console.log('fffff: ', tagLinks);
+    //console.log('fffff: ', tagLinks);
     /* START LOOP: for each link */
     for (let tag of tagLinks) {
 
