@@ -1,6 +1,18 @@
 {
   'use strict';
 
+  const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list',
+    optArticleSingleTagSelector = '.post-tags a',
+    optTagsListSelector = '.list.tags a',
+    optArticleAuthorSelector = '.post-author',
+    optArticleSingleAuthorSelector = '.post-author a',
+    optAuthorListSelector = '.list.authors a',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-';
+
   const titleClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
@@ -38,18 +50,6 @@
 
   };
 
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list',
-    optArticleSingleTagSelector = '.post-tags a',
-    optTagsListSelector = '.list.tags a',
-    optArticleAuthorSelector = '.post-author',
-    optArticleSingleAuthorSelector = '.post-author a',
-    optAuthorListSelector = '.list.authors a',
-    optCloudClassCount = 5,
-    optCloudClassPrefix = 'tag-size-';
-
   function generateTitleLinks(customSelector = ''){
 
     /* [DONE] remove contents of titleList */
@@ -81,16 +81,14 @@
       /* [DONE] insert link into titleList */
       html = html + linkHTML;
     }
-
     titleList.innerHTML = html;
+    const links = document.querySelectorAll('.titles a');
+
+    for (let link of links){
+      link.addEventListener('click', titleClickHandler);
+    }
   }
   generateTitleLinks();
-
-  const links = document.querySelectorAll('.titles a');
-
-  for (let link of links){
-    link.addEventListener('click', titleClickHandler);
-  }
 
   function calculateTagsParams (tags){
     const params = {
