@@ -9,7 +9,7 @@
     optTagsListSelector = '.list.tags a',
     optArticleAuthorSelector = '.post-author',
     optArticleSingleAuthorSelector = '.post-author a',
-    optAuthorListSelector = '.list.authors a',
+    optAuthorListSelector = '.list.authors',
     optCloudClassCount = 5,
     optCloudClassPrefix = 'tag-size-';
 
@@ -247,6 +247,10 @@
 
   /* GENERATE AUTHORS */
   function generateAuthors(){
+
+    /* [NEW] create a new variable allAuthors with an empty array */
+    let allAuthors = [];
+
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
 
@@ -257,6 +261,7 @@
       const authorList = article.querySelector(optArticleAuthorSelector);
       console.log('found Author wrapper: ', authorList);
 
+      const authorsidebar = document.querySelectorAll(optAuthorListSelector);
       /* make html variable with empty string */
       let html = '';
 
@@ -266,14 +271,26 @@
 
       /* generate HTML of the link */
       const authorLinkHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
-      console.log('generated linkAuthorHTML: ', authorLinkHTML);
+      console.log('generated authorLinkHTML: ', authorLinkHTML);
 
       /* add generated code to html variable */
       html = html + authorLinkHTML;
       console.log('added code to html: ', html);
 
+      let htmlsidebar = '';
+      htmlsidebar = htmlsidebar + authorLinkHTML;
+
+      /* [NEW] check if this link is NOT already in allAuthors */
+      if(allAuthors.indexOf(articleAuthor) == -1){
+        /*[NEW] add generated code to allTags allAuthors array */
+        allAuthors.push(articleAuthor);
+      }
+
       /* add html for each author wrapper */
       authorList.innerHTML = html;
+      authorsidebar.innerHTML = htmlsidebar;
+      console.log('blebleble: ', authorsidebar);
+      console.log('authorList: ', authorList);
       console.log('added html for each author: ', html);
     }
 
