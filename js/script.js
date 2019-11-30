@@ -10,6 +10,9 @@
     optArticleAuthorSelector = '.post-author',
     optArticleSingleAuthorSelector = '.post-author a',
     optAuthorListSelector = '.list.authors',
+    //tutaj dodatkowe selektory który wykorzystywany jest w funnkcji zmieniającej
+    //href. Tutaj można zrobić refactor bo spokojnie można to zrobić bez tego.
+    optAuthorListElem = '.list.authors li a',
     optCloudClassCount = 5,
     optCloudClassPrefix = 'tag-size-';
 
@@ -51,7 +54,6 @@
   };
 
   function generateTitleLinks(customSelector = '') {
-
     /* [DONE] remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
@@ -257,16 +259,24 @@
     const articles = document.querySelectorAll(optArticleSelector);
 
     //Htmlsidebar ustawiamy poza pętlą żeby się nie zerowało za każdym razem
+    //For each wstawiłem żeby wystawić autorów z prawej storny można to zrobić na
+    //100 różnych sposobów. co do liczby artykułów można by dodatkowo zliczać wystąpienia
+    //w pętli czyli w przypadku w którym teraz jest return dodać jakiś index który można inkrementować.
+    //To też możesz zmienić prawdopodobnie jakby się wczytać w kod to tam już przygotowane są pod to jakieś strukturki.
+
+
+    //samo for each działa tak jal for of coś e w funkcji jest odpowiednikiem poszczególnego artykułu
+    // robię link z autorem później sprawdzam czy już jest w naszym stringu jak nie to dodaj
     let htmlsidebar = '';
     const authorsidebar = document.querySelector(optAuthorListSelector);
     articles.forEach((e)=>{
-     let autor = e.getAttribute('data-author');
-       const asideAuthorLinkHTML = '<li><a href="#author-' + autor + '"><span>' + autor + '</span></a></li>';
-     if(htmlsidebar.includes(asideAuthorLinkHTML)){
-       return;
-     } else {
-       htmlsidebar = htmlsidebar + asideAuthorLinkHTML + '';
-     }
+      let autor = e.getAttribute('data-author');
+      const asideAuthorLinkHTML = '<li><a href="#author-' + autor + '"><span>' + autor + '</span></a></li>';
+      if(htmlsidebar.includes(asideAuthorLinkHTML)){
+        return;
+      } else {
+        htmlsidebar = htmlsidebar + asideAuthorLinkHTML + '';
+      }
       authorsidebar.innerHTML = htmlsidebar;
     });
 
@@ -318,6 +328,12 @@
     event.preventDefault();
     const clickedElement = this;
     console.log('Author was clicked');
+    console.log(clickedElement, ' cliked element WW');
+    // Tutaj dodałem aktywację elementu -> nie sprawdzam czy wyżej już to było robione. Ponieważ nie ma tego w funkcji to
+    //być może powinno się samo ustawiać przy starcie aplikacji ładując pierwszy artykuł i tam dodawane active do autora oraz tagów
+    //przez co później w funkcji usuwana jest ta clasa i dodawana konkretnemu autorowi
+    clickedElement.classList.add('active');
+
 
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
@@ -328,6 +344,8 @@
     console.log('replaced #author- with:', author);
     /* find all author links with class active */
     const activeAuthors = document.querySelectorAll('a.active[href^="#author-"]');
+    //Tutaj nie było wcześniej żadnego elementu a więc pusta tablica, co dalej idzie nie da się dodać active ani usunąć ani nie dodaje click listnera
+    console.log(activeAuthors, ' sprawdzenie active autors po tym wiedziałem gdzie jest błąd');
 
     /* START LOOP: for each active author link */
     for (let activeAuthor of activeAuthors) {
@@ -349,21 +367,22 @@
       /* execute function "generateTitleLinks" with article selector as argument */
       generateTitleLinks('[data-author="' + author + '"]');
     }
-
-
-    function addClickListenersToAuthors() {
-      /* find all links to authors */
-      const authorLinks = document.querySelectorAll(optArticleSingleAuthorSelector + ',' + optAuthorListSelector);
-      console.log('found links to authors: ', authorLinks);
-      /* START LOOP: for each link */
-      for (let author of authorLinks) {
-
-        /* add authorClickHandler as event listener for that link */
-        author.addEventListener('click', authorClickHandler);
-        /* END LOOP: for each link */
-      }
-    }
-
-    addClickListenersToAuthors();
   };
+  //Poniżej usunąłem jeden nawias który powodował że funkcje od któregoś miejsca się nie odpalały
+
+  function addClickListenersToAuthors() {
+    /* find all links to authors */
+    const authorLinks = document.querySelectorAll(optArticleSingleAuthorSelector + ',' + optAuthorListElem);
+    console.log('found links to authors: ', authorLinks);
+
+    /* START LOOP: for each link */
+    for (let author of authorLinks) {
+
+      /* add authorClickHandler as event listener for that link */
+      author.addEventListener('click', authorClickHandler);
+      /* END LOOP: for each link */
+    }
+  }
+
+  addClickListenersToAuthors();
 }
